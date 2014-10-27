@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="datatableconfig.css">
+        <script src="datatableconfig.js"></script>
+        <title>Data Table Configuration</title>
+    </head>
+    <body>
+        <form id="column-table-body-template">
+        	<fieldset class="column-info">
+                <legend></legend>
+                <label>Title: <input type="radio" name="title" value="true"></label>
+                <label>Visible: <input type="checkbox" name="visible" value="true"></label>
+                <label>Sortable: <input type="checkbox" name="sortable" value="true"></label>
+                <label>Searchable: <input type="checkbox" name="searchable" value="true"></label>
+                <input type="button" name="remove" value="Remove me!">
+            </fieldset>
+        </form>
+        <div id="config-tool-container">
+            <form id="config-tool-form">
+            	<textarea cols="100" rows="20" id="column-info-json-import" placeholder="Paste existing config here..."></textarea>
+            	<input type="button" id="config-importer" value="Import config">
+                <br>
+                <input id="column-field" type="text" placeholder="Column name">
+                <input type="button" id="column-creator" value="Add column">
+                <br>
+                <div id="config-tool-column-wrapper"></div>
+                <br>
+            	<input type="submit" value="Generate parameters!">
+        	</form>
+        	<pre id="config-tool-output"></pre>
+    	</div>
+	    <script>
+	    	$(document).ready(function () {
+	    		var dataTableConfig = new DataTableConfig();
+	    	});
+	    </script>
+	</body>
+</html>

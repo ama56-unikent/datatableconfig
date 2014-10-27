@@ -1,0 +1,16 @@
+* {
+	margin: 1%;
+}
+
+#column-table-body-template {
+	display: none;
+}
+
+#column-table {
+	border: 1px black solid;
+}
+
+#config-tool-output {
+	background-color: rgb(0,0,0);
+	color: #ffffff;
+}
