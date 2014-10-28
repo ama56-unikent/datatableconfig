@@ -1,0 +1,11 @@
+{
+    "Test": {
+        "title": "true",
+        "visible": "true",
+        "sortable": "true"
+    },
+    "Hello": {
+        "searchable": "true"
+    },
+    "Now": {}
+}

@@ -31,9 +31,11 @@ function DataTableConfig(){
 				$newEntry.attr({name:columnName});
 				$newEntry.find("legend").html(columnName);
 				$("#config-tool-column-wrapper").append($newEntry);
+				$("#config-tool-column-wrapper").trigger("ContentChanged");
 				$newEntry.find("input[name='remove']").click(function(event){
 					event.preventDefault();
 					$newEntry.remove();
+					$("#config-tool-column-wrapper").trigger("ContentChanged");
 				});
 				$("#column-field").val("");
 			}
@@ -45,27 +47,57 @@ function DataTableConfig(){
 			$(this).find("fieldset.column-info").each(function(){
 				output[$(this).attr("name")] = $(this).serializeObject();
 			});
-			$("#config-tool-output").html(JSON.stringify(output, undefined, 4));
+			var outputElem = $("#config-tool-output");
+			outputElem.html(JSON.stringify(output, undefined, 4));
+			hljs.highlightBlock(outputElem[0]);
 		});
 
 		$("#config-importer").click(function(event){
 			event.preventDefault();
-			var $jsonTextArea = $("#column-info-json-import");
-			var jsonStr = $jsonTextArea.val(),
-				json;
+			var $darkScreen = $("#dark-screen");			
+			var $importerForm = $("#config-importer-template").clone();
+			$darkScreen.find("#pop-up").append($importerForm);
+			$importerForm.show();
+			$importerForm.submit(function(event){
+				event.preventDefault();
+				var $jsonTextArea = $(this).find("#column-info-json-import");
+				var jsonStr = $jsonTextArea.val(),
+					json;
 
-			try{
-				json = $.parseJSON(jsonStr);
-			}
-			catch(e){
-				alert("Bad JSON!");
-			}
+				try{
+					json = $.parseJSON(jsonStr);
+				}
+				catch(e){
+					alert("Bad JSON!");
+				}
 
-			if(json){
-				createColumn(json);
-				$("#config-tool-output").html(JSON.stringify(json, undefined, 4));
-			}
-			$jsonTextArea.val("");
+				$darkScreen.fadeOut({
+					complete: function(){
+						if(json){
+							createColumn(json);
+							$("#config-tool-output").html(JSON.stringify(json, undefined, 4));
+							hljs.highlightBlock($("#config-tool-output")[0]);
+						}
+						$importerForm.remove();
+					}					
+				});
+			});
+			$importerForm.find(".cancel").click(function(){
+				$darkScreen.fadeOut({
+					complete: function(){
+						$importerForm.remove();
+					}
+				});
+			});
+			$darkScreen.fadeIn();
+		});
+
+		$("#config-tool-column-wrapper").on("ContentChanged",function(){
+			console.log("ContentChanged");
+			if($(this).is(":empty"))
+				$(this).addClass("empty");
+			else
+				$(this).removeClass("empty");
 		});
 	}
 
@@ -76,9 +108,11 @@ function DataTableConfig(){
 			$newEntry.attr({name:columnName});
 			$newEntry.find("legend").html(columnName);
 			$("#config-tool-column-wrapper").append($newEntry);
-			$newEntry.find("input[name='remove']").click(function(event){
+			$newEntry.find("input[name='remove']")
+				.click({columnEntry:$newEntry},function(event){
 				event.preventDefault();
-				$newEntry.remove();
+				event.data.columnEntry.remove();
+				$("#config-tool-column-wrapper").trigger("ContentChanged");
 			});
 			var columnProps = data[columnName];
 			for(var propName in columnProps){
@@ -89,6 +123,7 @@ function DataTableConfig(){
 						$(this).prop({checked:true});
 				});				
 			}
-		}			
+		}
+		$("#config-tool-column-wrapper").trigger("ContentChanged");
 	}
 }
