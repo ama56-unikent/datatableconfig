@@ -12,10 +12,13 @@
         <form class="template" id="column-table-body-template">
         	<fieldset class="column-info">
                 <legend></legend>
-                <label>Title: <input type="radio" name="title" value="true"></label>
+                <label>Category: <input type="radio" name="category" value="true"></label>
                 <label>Visible: <input type="checkbox" name="visible" value="true"></label>
                 <label>Sortable: <input type="checkbox" name="sortable" value="true"></label>
                 <label>Searchable: <input type="checkbox" name="searchable" value="true"></label>
+                <label>Pop-up Title: <input type="radio" name="popup-title" value="true"></label>
+                <label>Included in Pop-up: <input type="checkbox" name="popup-column" value="true"></label>
+                <label>Linked in Pop-up (only for URLs): <input type="checkbox" name="popup-link" value="true"></label>
                 <input type="button" name="remove" value="Remove column">
             </fieldset>
         </form>
@@ -31,13 +34,45 @@
                 	<input type="button" id="config-importer" value="Import existing config">
                 </div>
                 <div class="segment">
+                	<fieldset id="data-source-settings">
+                		<legend>Source</legend>
+                		<label>SharePoint: <input type="radio" name="source" value="SharePoint" required checked></label>
+                		<label>Location: <input type="text" name="location"></label>
+                		<label>List: <input type="text" name="list"></label>
+                		<label>View: <input type="text" name="view"></label>
+                		<br>
+                		or
+                		<br>
+                		<label>CSV file: <input type="radio" name="source" value="CSV" required></label>
+                		<label>Path to file: <input type="text" name="filepath"></label>
+            		</fieldset>
+        		</div>
+        		<div class="segment">
+                	<fieldset id="general-datatable-settings">
+                		<legend>DataTable</legend>
+                		View Type:
+                		<label>Scrolling only: <input type="radio" name="viewType" value="Scrolling" required checked></label>
+                		<label>Paging and Scrolling: <input type="radio" name="viewType" value="Paging" required></label>
+                		<br>
+                		<label>Height: <input type="text" name="height" value="700" required>px</label>
+                		<br>
+                		<label>Limit number of lines (only in table-view and not in pop-up): <input type="checkbox" name="lineLimiter" value="true"></label>
+                	</fieldset>
+                </div>
+                <div class="segment">
                 	<input id="column-field" type="text" placeholder="Column name">
                 	<input type="submit" id="column-creator" value="Add column">
                 </div>
                 <div class="segment change-watch empty" id="config-tool-column-wrapper"></div>
                 <div class="segment">
                 	<input type="submit" value="Generate parameters!">
-                </div>     	
+                </div>
+                <div class="segment">
+                	<fieldset id="popup-settings">
+                		<legend>Pop-up</legend>
+                		<label>Activated: <input type="checkbox" name="activation" value="true"></label>
+                	</fieldset>
+                </div>  	
 	        	<div class="segment last output-wrapper">
 	            	<pre class="json" id="config-tool-output"></pre>
 	            </div>    	
