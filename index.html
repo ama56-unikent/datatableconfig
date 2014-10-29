@@ -10,83 +10,106 @@
         <title>Data Table Configuration</title>
     </head>
     <body>
-        <form class="template" id="column-table-body-template">
-        	<fieldset class="column-info">
+
+        <form id="column-entry-template">
+        	<fieldset class="column-entry">
                 <legend></legend>
-                <label>Category: <input type="radio" name="category" value="true"></label>
-                <label>Visible: <input type="checkbox" name="visible" value="true"></label>
-                <label>Sortable: <input type="checkbox" name="sortable" value="true"></label>
-                <label>Searchable: <input type="checkbox" name="searchable" value="true"></label>
-                <label>Pop-up Title: <input type="radio" name="popup-title" value="true"></label>
-                <label>Included in Pop-up: <input type="checkbox" name="popup-column" value="true"></label>
-                <label>Linked in Pop-up (only for URLs): <input type="checkbox" name="popup-link" value="true"></label>
-                <input type="button" name="remove" value="Remove column">
+                <div class="nav-tools">
+	                <input type="button" name="moveUp" value="&#8593;">
+	                <input type="button" name="moveUp" value="&#8595;">
+	                <br>
+	                <input type="button" name="remove" value="Remove column">
+                </div>
+                <div class="input-tools">
+	                <label>Category: <input type="radio" name="category" value="true"></label>
+	                <label>Visible: <input type="checkbox" name="visible" value="true"></label>
+	                <label>Sortable: <input type="checkbox" name="sortable" value="true"></label>
+	                <label>Searchable: <input type="checkbox" name="searchable" value="true"></label>
+	                <label>Pop-up Title: <input type="radio" name="popupTitle" value="true"></label>
+	                <label>Included in Pop-up: <input type="checkbox" name="popupColumn" value="true"></label>
+	                <label>Linked in Pop-up (only for URLs): <input type="checkbox" name="popupLink" value="true"></label>
+                </div>
             </fieldset>
         </form>
+
         <form class="template" id="config-importer-template">       	
-    		<textarea cols="100" rows="20" id="column-info-json-import" placeholder="Paste existing config here..."></textarea>
+    		<textarea cols="100" rows="20" id="config-holder" placeholder="Paste existing config here..."></textarea>
     		<br>
     		<input type="button" class="cancel" value="Cancel">
     		<input type="submit" value="Import">
         </form>
+
         <h1>Data Table Config Tool</h1>
-        <form id="config-tool-form">
-	        <div id="config-tool-container">
+
+        <form name="dataTableSettings" id="data-table-config-form">
+
+	        <div class="segment-wrapper">
+
                 <div class="segment">
                 	<input type="button" id="config-importer" value="Import existing config">
                 </div>
+
                 <div class="segment">
-                	<fieldset id="data-source-settings">
-                		<legend>Source</legend>
-                		<label>SharePoint: <input type="radio" name="source" value="SharePoint" required checked></label>
-                		<label>Location: <input type="text" name="location"></label>
-                		<label>List: <input type="text" name="list"></label>
-                		<label>View: <input type="text" name="view"></label>
+                	<fieldset name="dataSource">
+                		<legend>Data Source</legend>
+                		<label>SharePoint: <input type="radio" name="dataSource[value][type]" value="sharepoint" required checked></label>
+                		<label>Location: <input type="text" name="dataSource[value][sharepoint][location]"></label>
+                		<label>List: <input type="text" name="dataSource[value][sharepoint][list]"></label>
+                		<label>View: <input type="text" name="dataSource[value][sharepoint][view]"></label>
                 		<br>
                 		or
                 		<br>
-                		<label>CSV file: <input type="radio" name="source" value="CSV" required></label>
-                		<label>Path to file: <input type="text" name="filepath"></label>
+                		<label>CSV file: <input type="radio" name="dataSource[value][type]" value="csv" required></label>
+                		<label>Path to file: <input type="text" name="dataSource[value][csv][filePath]"></label>
             		</fieldset>
         		</div>
+
         		<div class="segment">
-                	<fieldset id="general-datatable-settings">
-                		<legend>DataTable</legend>
+                	<fieldset name="general">
+                		<legend>General</legend>
                 		View Type:
-                		<label>Scrolling only: <input type="radio" name="viewType" value="Scrolling" required checked></label>
-                		<label>Paging and Scrolling: <input type="radio" name="viewType" value="Paging" required></label>
+                		<label>Scrolling only: <input type="radio" name="general[viewType]" value="scrolling" required checked></label>
+                		<label>Paging and Scrolling: <input type="radio" name="general[viewType]" value="paging" required></label>
                 		<br>
-                		<label>Height: <input type="text" name="height" value="700" required>px</label>
+                		<label>Height: <input type="text" name="general[height]" value="700" required>px</label>
                 		<br>
-                		<label>Limit number of lines (only in table-view and not in pop-up): <input type="checkbox" name="lineLimiter" value="true"></label>
+                		<label>Limit number of lines (only in table-view and not in pop-up): <input type="checkbox" name="general[lineLimiter]" value="true"></label>
                 	</fieldset>
                 </div>
+
                 <div class="segment">
-                	<input id="column-field" type="text" placeholder="Column name">
-                	<input type="submit" id="column-creator" value="Add column">
+                	<input id="column-name-field" type="text" placeholder="Column name">
+                	<input type="submit" id="column-entry-creator" value="Add column">
                 </div>
+
                 <div class="segment">
-                	<fieldset id="config-tool-column-wrapper">
+                	<fieldset name="columns">
                 		<legend>Columns</legend>
                 	</fieldset>
-                </div>             
+                </div>
+
                 <div class="segment">
-                	<fieldset id="popup-settings">
+                	<fieldset name="popUp">
                 		<legend>Pop-up</legend>
-                		<label>Activated: <input type="checkbox" name="activation" value="true"></label>
+                		<label>Activated: <input type="checkbox" name="popUp[status]" value="true"></label>
                 	</fieldset>
                 </div>
+
                 <div class="segment">
                 	<input type="submit" value="Generate parameters!">
-                </div>	
+                </div>
+
 	        	<div class="segment">
 	            	<pre class="json" id="config-tool-output">{}</pre>
-	            </div>    	
+	            </div>
+
 	    	</div>
     	</form>
+
     	<div id="dark-screen">
     		<div id="pop-up"></div>
     	</div>
+
 	    <script>
 	    	$(document).ready(function () {
 	    		var dataTableConfig = new DataTableConfig();
