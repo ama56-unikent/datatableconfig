@@ -2,25 +2,31 @@
 	margin: 1%;
 }
 
+h1 {
+	text-align: center;
+	margin-top: 1%;
+	margin-bottom: 3%;
+}
+
 #config-tool-output {
+	text-align: left;
 	font-size: 150%;
+	border: 3px #732424 solid;
 }
 
 #config-tool-container {
 	width: 90%;
 	text-align: center;
+	margin: 0 auto;	
+	font-size: 125%;
 }
 
 .segment {
 	width: 100%;
-	border-bottom: 1px #2E2E2E solid;
 	margin-top: 1%;
 	margin-bottom: 2%;
-}
-
-.segment.empty,
-.segment.last {
-	border-bottom: none;
+	margin-left: 0;
+	margin-right: 0;
 }
 
 .output-wrapper {
@@ -51,4 +57,13 @@
 	width: 70%;
 	height: 50%;
 	text-align: center;
+}
+
+html {
+	background-color: #AE711B;
+	color: #221a0f;
+}
+
+fieldset {
+	border: 3px #732424 solid;
 }

@@ -1,25 +1,9 @@
-$.fn.serializeObject = function()
-{
-   var o = {};
-   var a = this.serializeArray();
-   $.each(a, function() {
-       if (o[this.name]) {
-           if (!o[this.name].push) {
-               o[this.name] = [o[this.name]];
-           }
-           o[this.name].push(this.value || '');
-       } else {
-           o[this.name] = this.value || '';
-       }
-   });
-   return o;
-};
-
 function DataTableConfig(){
 	var dataTableConfig = this,
 		$columnInfoTemplate = $("#column-table-body-template fieldset"),
 		output = {};
 
+	hljs.highlightBlock($("#config-tool-output")[0]);
 	listen();
 
 	function listen(){
@@ -31,11 +15,9 @@ function DataTableConfig(){
 				$newEntry.attr({name:columnName});
 				$newEntry.find("legend").html(columnName);
 				$("#config-tool-column-wrapper").append($newEntry);
-				$("#config-tool-column-wrapper").trigger("ContentChanged");
 				$newEntry.find("input[name='remove']").click(function(event){
 					event.preventDefault();
 					$newEntry.remove();
-					$("#config-tool-column-wrapper").trigger("ContentChanged");
 				});
 				$("#column-field").val("");
 			}
@@ -43,6 +25,7 @@ function DataTableConfig(){
 
 		$("#config-tool-form").submit(function(event){
 			event.preventDefault();
+			console.log($(this).serializeObject());
 			output = {};
 			$(this).find("fieldset.column-info").each(function(){
 				output[$(this).attr("name")] = $(this).serializeObject();
@@ -91,18 +74,10 @@ function DataTableConfig(){
 			});
 			$darkScreen.fadeIn();
 		});
-
-		$("#config-tool-column-wrapper").on("ContentChanged",function(){
-			console.log("ContentChanged");
-			if($(this).is(":empty"))
-				$(this).addClass("empty");
-			else
-				$(this).removeClass("empty");
-		});
 	}
 
 	function createColumn(data){
-		$("#config-tool-column-wrapper").html("");
+		$("#config-tool-column-wrapper").html("<legend>Columns</legend>");
 		for(var columnName in data){
 			var $newEntry = $columnInfoTemplate.clone();
 			$newEntry.attr({name:columnName});
@@ -112,7 +87,6 @@ function DataTableConfig(){
 				.click({columnEntry:$newEntry},function(event){
 				event.preventDefault();
 				event.data.columnEntry.remove();
-				$("#config-tool-column-wrapper").trigger("ContentChanged");
 			});
 			var columnProps = data[columnName];
 			for(var propName in columnProps){
@@ -124,6 +98,5 @@ function DataTableConfig(){
 				});				
 			}
 		}
-		$("#config-tool-column-wrapper").trigger("ContentChanged");
 	}
 }

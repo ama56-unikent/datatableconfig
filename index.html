@@ -2,6 +2,7 @@
 <html>
     <head>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="jquery.serialize-object.min.js"></script>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/kimbie.dark.min.css">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
         <link rel="stylesheet" type="text/css" href="datatableconfig.css">
@@ -28,6 +29,7 @@
     		<input type="button" class="cancel" value="Cancel">
     		<input type="submit" value="Import">
         </form>
+        <h1>Data Table Config Tool</h1>
         <form id="config-tool-form">
 	        <div id="config-tool-container">
                 <div class="segment">
@@ -63,18 +65,22 @@
                 	<input id="column-field" type="text" placeholder="Column name">
                 	<input type="submit" id="column-creator" value="Add column">
                 </div>
-                <div class="segment change-watch empty" id="config-tool-column-wrapper"></div>
                 <div class="segment">
-                	<input type="submit" value="Generate parameters!">
-                </div>
+                	<fieldset id="config-tool-column-wrapper">
+                		<legend>Columns</legend>
+                	</fieldset>
+                </div>             
                 <div class="segment">
                 	<fieldset id="popup-settings">
                 		<legend>Pop-up</legend>
                 		<label>Activated: <input type="checkbox" name="activation" value="true"></label>
                 	</fieldset>
-                </div>  	
-	        	<div class="segment last output-wrapper">
-	            	<pre class="json" id="config-tool-output"></pre>
+                </div>
+                <div class="segment">
+                	<input type="submit" value="Generate parameters!">
+                </div>	
+	        	<div class="segment">
+	            	<pre class="json" id="config-tool-output">{}</pre>
 	            </div>    	
 	    	</div>
     	</form>
