@@ -48,10 +48,26 @@ html {
 			border: 3px #732424 solid;
 		}
 
+#column-entry-container select {
+	min-width: 200px;	
+}
+
+#column-entry-container select[multiple] {
+	min-height: 100px;
+}
+
 #config-output {
 	text-align: left;
 	font-size: 150%;
 	border: 3px #732424 solid;
+}
+
+#worktop {
+	width: 95%;
+	height: 100%;
+	margin: 0 auto;
+	padding: 0;
+	overflow: auto;
 }
 
 #dark-screen {

@@ -1,11 +1,44 @@
+/IS/serviceman/servicecat
+Service Catalogue - Full view
+Web view
+
 {
-    "Test": {
-        "title": "true",
-        "visible": "true",
-        "sortable": "true"
+    "dataSource": {
+        "type": "sharepoint",
+        "sharepoint": {
+            "location": "/IS/serviceman/servicecat",
+            "list": "Service Catalogue - Full view",
+            "view": "Web view"
+        }
     },
-    "Hello": {
-        "searchable": "true"
+    "general": {
+        "viewType": "scrolling",
+        "height": "700",
+        "lineLimiter": "true"
     },
-    "Now": {}
+    "columns": {
+        "category": "Service Type",
+        "visible": [
+            "Service Name",
+            "Description"
+        ],
+        "sortable": [
+            "Service Name"
+        ],
+        "searchable": [
+            "Service Name",
+            "Also Known As/Tags",
+            "Service Type",
+            "Description"
+        ],
+        "popup": [
+            "Service Name",
+            "Description",
+            "Service URL",
+            "Service Hours"
+        ]
+    },
+    "popUp": {
+        "status": "true"
+    }
 }

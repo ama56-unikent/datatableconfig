@@ -10,106 +10,104 @@
         <title>Data Table Configuration</title>
     </head>
     <body>
+    	<div id="worktop">
+	        <h1>Data Table Config Tool</h1>
 
-        <form class="template" id="column-entry-template">
-        	<fieldset>
-                <legend></legend>
-                <div class="nav-tools inline-block">
-                	<input type="hidden" name="" value="">
-                	<input type="hidden" name="[order]">
-	                <input type="button" name="moveUp" value="&#8593;">
-	                <input type="button" name="moveUp" value="&#8595;">
-	                <br>
-	                <input type="button" name="remove" value="Remove">
-                </div>
-                <div class="input-tools inline-block">
-	                <label>Category: <input type="radio" name="[options][]" value="category"></label>
-	                <label>Visible: <input type="checkbox" name="[options][]" value="visible"></label>
-	                <label>Sortable: <input type="checkbox" name="[options][]" value="sortable"></label>
-	                <label>Searchable: <input type="checkbox" name="[options][]" value="searchable"></label>
-	                <label>Pop-up Title: <input type="radio" name="[options][]" value="popupTitle"></label>
-	                <label>Included in Pop-up: <input type="checkbox" name="[options][]" value="popupColumn"></label>
-	                <label>Linked in Pop-up (only for URLs): <input type="checkbox" name="[options][]" value="popupLink"></label>
-                </div>
-            </fieldset>
-        </form>
+	        <form name="dataTableSettings" id="data-table-config-form">
 
-        <form class="template" id="config-importer-template">       	
-    		<textarea cols="100" rows="20" id="config-holder" placeholder="Paste existing config here..."></textarea>
-    		<br>
-    		<input type="button" class="cancel" value="Cancel">
-    		<input type="submit" value="Import">
-        </form>
+		        <div class="segment-wrapper">
 
-        <h1>Data Table Config Tool</h1>
+	                <div class="segment">
+	                	<input type="button" id="config-importer" value="Import existing config">
+	                </div>
 
-        <form name="dataTableSettings" id="data-table-config-form">
+	                <div class="segment">
+	                	<fieldset name="dataSource">
+	                		<legend>Data Source</legend>
+	                		<label>SharePoint: <input type="radio" name="dataSource[type]" value="sharepoint" required checked></label>
+	                		<label>Location: <input type="text" name="dataSource[sharepoint][location]"></label>
+	                		<label>List: <input type="text" name="dataSource[sharepoint][list]"></label>
+	                		<label>View: <input type="text" name="dataSource[sharepoint][view]"></label>
+	                		<br>
+	                		or
+	                		<br>
+	                		<label>CSV file: <input type="radio" name="dataSource[type]" value="csv" required disabled></label>
+	                		<label>Path to file: <input type="text" name="dataSource[csv][filePath]" disabled></label>
+	                		<br>
+	                		<input type="submit" id="dataSourceImporter" value="Import columns">
+	            		</fieldset>
+	        		</div>
 
-	        <div class="segment-wrapper">
+	        		<div class="segment">
+	                	<fieldset name="general">
+	                		<legend>General</legend>
+	                		View Type:
+	                		<label>Scrolling only: <input type="radio" name="general[viewType]" value="scrolling" required checked></label>
+	                		<label>Paging and Scrolling: <input type="radio" name="general[viewType]" value="paging" required></label>
+	                		<br>
+	                		<label>Height: <input type="text" name="general[height]" value="700" required>px</label>
+	                		<br>
+	                		<label>Limit number of lines (only in table-view and not in pop-up): <input type="checkbox" name="general[lineLimiter]" value="true"></label>
+	                	</fieldset>
+	                </div>
 
-                <div class="segment">
-                	<input type="button" id="config-importer" value="Import existing config">
-                </div>
+	                <div class="segment">
+	                	<fieldset id="column-entry-container" name="columns">
+	                		<legend>Columns</legend>
+	                		<label>Pop-up title: 
+	                			<select name="columns[popup-title]"></select>
+	                		</label>
+	                		<label>Category drop-down: 
+	                			<select name="columns[category]"></select>
+	                		</label>
+	                		<br>
+	                		<label>Visible: 
+	                			<select name="columns[visible][]" multiple></select>
+	                		</label>
+	                		<label>Sortable: 
+	                			<select name="columns[sortable][]" multiple></select>
+	                		</label>
+	                		<label>Searchable: 
+	                			<select name="columns[searchable][]" multiple></select>
+	                		</label>
+	                		<br>
+	                		<label>Included in pop-up: 
+	                			<select name="columns[popup][]" multiple></select>
+	                		</label>
+	                		<label>Appear as link in pop-up: 
+	                			<select name="columns[popup-link][]" multiple></select>
+	                		</label>
+	                	</fieldset>
+	                </div>
 
-                <div class="segment">
-                	<fieldset name="dataSource">
-                		<legend>Data Source</legend>
-                		<label>SharePoint: <input type="radio" name="dataSource[type]" value="sharepoint" required checked></label>
-                		<label>Location: <input type="text" name="dataSource[sharepoint][location]"></label>
-                		<label>List: <input type="text" name="dataSource[sharepoint][list]"></label>
-                		<label>View: <input type="text" name="dataSource[sharepoint][view]"></label>
-                		<br>
-                		or
-                		<br>
-                		<label>CSV file: <input type="radio" name="dataSource[type]" value="csv" required></label>
-                		<label>Path to file: <input type="text" name="dataSource[csv][filePath]"></label>
-            		</fieldset>
-        		</div>
+	                <div class="segment">
+	                	<fieldset name="popUp">
+	                		<legend>Pop-up</legend>
+	                		<label>Activated: <input type="checkbox" name="popUp[status]" value="true" checked></label>
+	                	</fieldset>
+	                </div>
 
-        		<div class="segment">
-                	<fieldset name="general">
-                		<legend>General</legend>
-                		View Type:
-                		<label>Scrolling only: <input type="radio" name="general[viewType]" value="scrolling" required checked></label>
-                		<label>Paging and Scrolling: <input type="radio" name="general[viewType]" value="paging" required></label>
-                		<br>
-                		<label>Height: <input type="text" name="general[height]" value="700" required>px</label>
-                		<br>
-                		<label>Limit number of lines (only in table-view and not in pop-up): <input type="checkbox" name="general[lineLimiter]" value="true"></label>
-                	</fieldset>
-                </div>
+	                <div class="segment">
+	                	<input type="submit" value="Generate configuration!">
+	                </div>
 
-                <div class="segment">
-                	<input id="column-name-field" type="text" placeholder="Column name">
-                	<input type="submit" id="column-entry-creator" value="Add column">
-                </div>
+		        	<div class="segment">
+		            	<pre class="json" id="config-output">{}</pre>
+		            </div>
 
-                <div class="segment">
-                	<fieldset id="column-entry-container" name="columns">
-                		<legend>Columns</legend>
-                	</fieldset>
-                </div>
-
-                <div class="segment">
-                	<fieldset name="popUp">
-                		<legend>Pop-up</legend>
-                		<label>Activated: <input type="checkbox" name="popUp[status]" value="true"></label>
-                	</fieldset>
-                </div>
-
-                <div class="segment">
-                	<input type="submit" value="Generate configuration!">
-                </div>
-
-	        	<div class="segment">
-	            	<pre class="json" id="config-output">{}</pre>
-	            </div>
-
-	    	</div>
-    	</form>
-
+		    	</div>
+	    	</form>
+		</div>
+		
     	<div id="dark-screen">
-    		<div id="pop-up"></div>
+    		<div id="pop-up">
+    			<form id="config-importer-form">       	
+		    		<textarea cols="100" rows="20" id="config-holder" placeholder="Paste existing config here..."></textarea>
+		    		<br>
+		    		<input type="button" class="cancel" value="Cancel">
+		    		<input type="submit" value="Import">
+		        </form>
+    		</div>
     	</div>
 
 	    <script>
