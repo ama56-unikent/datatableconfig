@@ -1,40 +1,57 @@
-* {
-	margin: 1%;
+html {
+	background-color: #AE711B;
+	color: #221a0f;
 }
 
-h1 {
-	text-align: center;
-	margin-top: 1%;
-	margin-bottom: 3%;
+	* {
+		margin: 1%;
+	}
+
+	h1 {
+		text-align: center;
+		margin-top: 1%;
+		margin-bottom: 3%;
+	}
+
+.template {
+	display: none;
 }
 
-#config-tool-output {
-	text-align: left;
-	font-size: 150%;
-	border: 3px #732424 solid;
+.inline-block {
+	display: inline-block;
 }
 
-#config-tool-container {
+	.nav-tools {
+		width: 10%
+	}
+
+	.input-tools {
+		width: 80%;
+	}
+
+.segment-wrapper {
 	width: 90%;
 	text-align: center;
 	margin: 0 auto;	
 	font-size: 125%;
 }
 
-.segment {
-	width: 100%;
-	margin-top: 1%;
-	margin-bottom: 2%;
-	margin-left: 0;
-	margin-right: 0;
-}
+	.segment {
+		width: 100%;
+		margin-top: 1%;
+		margin-bottom: 2%;
+		margin-left: 0;
+		margin-right: 0;
+	}
 
-.output-wrapper {
+		.segment fieldset {
+			border: 3px #732424 solid;
+		}
+
+#config-output {
 	text-align: left;
-}
-
-.template {
-	display: none;
+	font-size: 150%;
+	border: 3px #732424 solid;
 }
 
 #dark-screen {
@@ -57,13 +74,4 @@ h1 {
 	width: 70%;
 	height: 50%;
 	text-align: center;
-}
-
-html {
-	background-color: #AE711B;
-	color: #221a0f;
-}
-
-fieldset {
-	border: 3px #732424 solid;
 }

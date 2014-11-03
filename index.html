@@ -11,23 +11,25 @@
     </head>
     <body>
 
-        <form id="column-entry-template">
-        	<fieldset class="column-entry">
+        <form class="template" id="column-entry-template">
+        	<fieldset>
                 <legend></legend>
-                <div class="nav-tools">
+                <div class="nav-tools inline-block">
+                	<input type="hidden" name="" value="">
+                	<input type="hidden" name="[order]">
 	                <input type="button" name="moveUp" value="&#8593;">
 	                <input type="button" name="moveUp" value="&#8595;">
 	                <br>
-	                <input type="button" name="remove" value="Remove column">
+	                <input type="button" name="remove" value="Remove">
                 </div>
-                <div class="input-tools">
-	                <label>Category: <input type="radio" name="category" value="true"></label>
-	                <label>Visible: <input type="checkbox" name="visible" value="true"></label>
-	                <label>Sortable: <input type="checkbox" name="sortable" value="true"></label>
-	                <label>Searchable: <input type="checkbox" name="searchable" value="true"></label>
-	                <label>Pop-up Title: <input type="radio" name="popupTitle" value="true"></label>
-	                <label>Included in Pop-up: <input type="checkbox" name="popupColumn" value="true"></label>
-	                <label>Linked in Pop-up (only for URLs): <input type="checkbox" name="popupLink" value="true"></label>
+                <div class="input-tools inline-block">
+	                <label>Category: <input type="radio" name="[options][]" value="category"></label>
+	                <label>Visible: <input type="checkbox" name="[options][]" value="visible"></label>
+	                <label>Sortable: <input type="checkbox" name="[options][]" value="sortable"></label>
+	                <label>Searchable: <input type="checkbox" name="[options][]" value="searchable"></label>
+	                <label>Pop-up Title: <input type="radio" name="[options][]" value="popupTitle"></label>
+	                <label>Included in Pop-up: <input type="checkbox" name="[options][]" value="popupColumn"></label>
+	                <label>Linked in Pop-up (only for URLs): <input type="checkbox" name="[options][]" value="popupLink"></label>
                 </div>
             </fieldset>
         </form>
@@ -52,15 +54,15 @@
                 <div class="segment">
                 	<fieldset name="dataSource">
                 		<legend>Data Source</legend>
-                		<label>SharePoint: <input type="radio" name="dataSource[value][type]" value="sharepoint" required checked></label>
-                		<label>Location: <input type="text" name="dataSource[value][sharepoint][location]"></label>
-                		<label>List: <input type="text" name="dataSource[value][sharepoint][list]"></label>
-                		<label>View: <input type="text" name="dataSource[value][sharepoint][view]"></label>
+                		<label>SharePoint: <input type="radio" name="dataSource[type]" value="sharepoint" required checked></label>
+                		<label>Location: <input type="text" name="dataSource[sharepoint][location]"></label>
+                		<label>List: <input type="text" name="dataSource[sharepoint][list]"></label>
+                		<label>View: <input type="text" name="dataSource[sharepoint][view]"></label>
                 		<br>
                 		or
                 		<br>
-                		<label>CSV file: <input type="radio" name="dataSource[value][type]" value="csv" required></label>
-                		<label>Path to file: <input type="text" name="dataSource[value][csv][filePath]"></label>
+                		<label>CSV file: <input type="radio" name="dataSource[type]" value="csv" required></label>
+                		<label>Path to file: <input type="text" name="dataSource[csv][filePath]"></label>
             		</fieldset>
         		</div>
 
@@ -83,7 +85,7 @@
                 </div>
 
                 <div class="segment">
-                	<fieldset name="columns">
+                	<fieldset id="column-entry-container" name="columns">
                 		<legend>Columns</legend>
                 	</fieldset>
                 </div>
@@ -96,11 +98,11 @@
                 </div>
 
                 <div class="segment">
-                	<input type="submit" value="Generate parameters!">
+                	<input type="submit" value="Generate configuration!">
                 </div>
 
 	        	<div class="segment">
-	            	<pre class="json" id="config-tool-output">{}</pre>
+	            	<pre class="json" id="config-output">{}</pre>
 	            </div>
 
 	    	</div>
